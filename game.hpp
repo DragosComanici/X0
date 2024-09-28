@@ -1,3 +1,6 @@
+#ifndef GAME_HPP
+#define GAME_HPP
+
 #include "Board.hpp"
 #include "Player.hpp"
 
@@ -15,3 +18,4 @@ private:
     void playTurn();
     void switchCurrentPlayer();
 };
+#endif

@@ -1,3 +1,6 @@
+#ifndef BOARD_HPP
+#define BOARD_HPP
+
 class Board {
 public:
     Board();
@@ -9,3 +12,4 @@ public:
 private:
     char grid[3][3];
 };
+#endif

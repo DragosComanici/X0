@@ -1,3 +1,6 @@
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
+
 class Player {
 public:
     Player(char marker);
@@ -10,3 +13,4 @@ private:
     char marker;
     int playerNumber;
 };
+#endif
