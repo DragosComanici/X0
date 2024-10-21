@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include <iostream>
 
+// Constructor implicit
 Game::Game() : currentPlayer(1), player1('X'), player2('O') {}
 
 void Game::start() {

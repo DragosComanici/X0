@@ -9,15 +9,67 @@ Board::Board() {
     }
 }
 
-void Board::draw() const {
+Board::Board(char initialGrid[3][3]) {
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            std::cout << grid[i][j];
-            if (j < 2) std::cout << " | ";
+            grid[i][j] = initialGrid[i][j];
         }
-        std::cout << std::endl;
-        if (i < 2) std::cout << "---------" << std::endl;
     }
+}
+
+Board::Board(const Board &other) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            grid[i][j] = other.grid[i][j];
+        }
+    }
+}
+
+Board& Board::operator=(const Board &other) {
+    if (this != &other) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                grid[i][j] = other.grid[i][j];
+            }
+        }
+    }
+    return *this;
+}
+
+bool Board::operator==(const Board &other) const {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            if (grid[i][j] != other.grid[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+std::ostream& operator<<(std::ostream &out, const Board &board) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            out << board.grid[i][j];
+            if (j < 2) out << " | ";
+        }
+        out << std::endl;
+        if (i < 2) out << "---------" << std::endl;
+    }
+    return out;
+}
+
+std::istream& operator>>(std::istream &in, Board &board) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            in >> board.grid[i][j];
+        }
+    }
+    return in;
+}
+
+void Board::draw() const {
+    std::cout << *this;
 }
 
 bool Board::placeMarker(int slot, char marker) {
