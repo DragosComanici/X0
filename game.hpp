@@ -6,7 +6,7 @@
 
 class Game {
 public:
-    // Constructor implicit
+    // Constructor
     Game();
 
     void start();
@@ -18,7 +18,6 @@ private:
     int currentPlayer;
 
     void playTurn();
-
     void switchCurrentPlayer();
 };
 

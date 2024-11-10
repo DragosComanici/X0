@@ -14,7 +14,3 @@ void Player::setMarker(char marker) {
 int Player::getPlayerNumber() const {
     return playerNumber;
 }
-
-void Player::switchPlayer() {
-    playerNumber = (playerNumber == 1) ? 2 : 1;
-}

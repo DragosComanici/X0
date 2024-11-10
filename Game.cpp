@@ -1,8 +1,12 @@
 #include "Game.hpp"
 #include <iostream>
 
-// Constructor implicit
-Game::Game() : currentPlayer(1), player1('X'), player2('O') {}
+// Constructor
+Game::Game() 
+    : board(),
+      player1('X'),
+      player2('O'),
+      currentPlayer(1) {}
 
 void Game::start() {
     while (!board.isFull() && board.checkWinner() == 0) {
@@ -21,19 +25,25 @@ void Game::start() {
 void Game::playTurn() {
     board.draw();
     std::cout << "Player " << currentPlayer << "'s turn. Enter a slot (1-9): ";
-    
-    int slot;
-    std::cin >> slot;
 
-    if (currentPlayer == 1) {
-        if (!board.placeMarker(slot, player1.getMarker())) {
-            std::cout << "Invalid move! Try again." << std::endl;
-            playTurn();
-        }
-    } else {
-        if (!board.placeMarker(slot, player2.getMarker())) {
-            std::cout << "Invalid move! Try again." << std::endl;
-            playTurn();
+    int slot;
+    bool validMove = false;
+
+    while (!validMove) {
+        std::cin >> slot;
+
+        if (currentPlayer == 1) {
+            if (board.placeMarker(slot, player1.getMarker())) {
+                validMove = true;
+            } else {
+                std::cout << "Invalid move! Try again." << std::endl;
+            }
+        } else {
+            if (board.placeMarker(slot, player2.getMarker())) {
+                validMove = true;
+            } else {
+                std::cout << "Invalid move! Try again." << std::endl;
+            }
         }
     }
 }

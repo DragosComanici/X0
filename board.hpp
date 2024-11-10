@@ -2,6 +2,7 @@
 #define BOARD_HPP
 
 #include <iostream>
+#include <array>
 
 class Board {
 public:
@@ -9,7 +10,7 @@ public:
     Board();
 
     // Constructor cu parametri
-    Board(char initialGrid[3][3]);
+    Board(const std::array<std::array<char, 3>, 3>& initialGrid);
 
     // Constructor de copiere
     Board(const Board &other);
@@ -32,7 +33,7 @@ public:
     bool isFull() const;
 
 private:
-    char grid[3][3];
+    std::array<std::array<char, 3>, 3> grid;
 };
 
 #endif

@@ -8,9 +8,9 @@
 
 - **game.cpp**: Implementarea metodelor din `game.hpp`, controlând fluxul jocului și interacțiunea cu jucătorii și tabla de joc.
 
-- **player.hpp**: Definește structura unui jucător, incluzând simbolul acestuia și metodele pentru gestionarea rândului și simbolului.
+- **player.hpp**: Definește structura unui jucător, incluzând simbolul acestuia (marker) și metodele pentru accesarea și modificarea acestuia. Numărul jucătorului este atribuit automat pe baza simbolului.
 
-- **player.cpp**: Conține implementarea metodelor din `player.hpp`, gestionând informațiile specifice fiecărui jucător. A fost adăugat suport pentru constructori și operatori.
+- **player.cpp**: Conține implementarea metodelor din player.hpp, gestionând informațiile specifice fiecărui jucător. Oferă funcționalitate de bază pentru crearea jucătorilor și obținerea simbolurilor lor.
 
 - **Makefile**: Conține instrucțiuni pentru compilarea proiectului. Acesta definește variabilele necesare, regulile pentru a genera executabilul și o regulă de curățare pentru a șterge executabilul generat.
 

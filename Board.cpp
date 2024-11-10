@@ -1,50 +1,45 @@
 #include "Board.hpp"
 #include <iostream>
+#include <array>
+#include <algorithm>
+
+class Board {
+public:
+    Board();
+    Board(const std::array<std::array<char, 3>, 3>& initialGrid);
+    Board(const Board &other);
+    Board& operator=(const Board &other);
+    bool operator==(const Board &other) const;
+    friend std::ostream& operator<<(std::ostream &out, const Board &board);
+    friend std::istream& operator>>(std::istream &in, Board &board);
+    void draw() const;
+    bool placeMarker(int slot, char marker);
+    int checkWinner() const;
+    bool isFull() const;
+
+private:
+    std::array<std::array<char, 3>, 3> grid;
+};
 
 Board::Board() {
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            grid[i][j] = ' ';
-        }
+    for (auto& row : grid) {
+        row.fill(' ');
     }
 }
 
-Board::Board(char initialGrid[3][3]) {
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            grid[i][j] = initialGrid[i][j];
-        }
-    }
-}
+Board::Board(const std::array<std::array<char, 3>, 3>& initialGrid) : grid(initialGrid) {}
 
-Board::Board(const Board &other) {
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            grid[i][j] = other.grid[i][j];
-        }
-    }
-}
+Board::Board(const Board &other) : grid(other.grid) {}
 
 Board& Board::operator=(const Board &other) {
     if (this != &other) {
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 3; ++j) {
-                grid[i][j] = other.grid[i][j];
-            }
-        }
+        grid = other.grid;
     }
     return *this;
 }
 
 bool Board::operator==(const Board &other) const {
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            if (grid[i][j] != other.grid[i][j]) {
-                return false;
-            }
-        }
-    }
-    return true;
+    return grid == other.grid;
 }
 
 std::ostream& operator<<(std::ostream &out, const Board &board) {
@@ -53,16 +48,16 @@ std::ostream& operator<<(std::ostream &out, const Board &board) {
             out << board.grid[i][j];
             if (j < 2) out << " | ";
         }
-        out << std::endl;
-        if (i < 2) out << "---------" << std::endl;
+        out << "\n";
+        if (i < 2) out << "---------\n";
     }
     return out;
 }
 
 std::istream& operator>>(std::istream &in, Board &board) {
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            in >> board.grid[i][j];
+    for (auto& row : board.grid) {
+        for (char& cell : row) {
+            in >> cell;
         }
     }
     return in;
@@ -85,7 +80,7 @@ bool Board::placeMarker(int slot, char marker) {
 
 int Board::checkWinner() const {
     for (int i = 0; i < 3; ++i) {
-        if (grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2] && grid[i][0] != ' ') {
+        if (std::equal(grid[i].begin(), grid[i].end(), grid[i].begin()) && grid[i][0] != ' ') {
             return grid[i][0] == 'X' ? 1 : 2;
         }
         if (grid[0][i] == grid[1][i] && grid[1][i] == grid[2][i] && grid[0][i] != ' ') {
@@ -102,12 +97,7 @@ int Board::checkWinner() const {
 }
 
 bool Board::isFull() const {
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            if (grid[i][j] == ' ') {
-                return false;
-            }
-        }
-    }
-    return true;
+    return std::all_of(grid.begin(), grid.end(), [](const std::array<char, 3>& row) {
+        return std::all_of(row.begin(), row.end(), [](char cell) { return cell != ' '; });
+    });
 }
