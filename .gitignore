@@ -1,5 +1,6 @@
 *.o          # Object files
 *.a          # Static libraries
+*.exe
 *.so         # Shared libraries (Linux)
 *.out        # Executables (Linux)
 

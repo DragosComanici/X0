@@ -7,16 +7,12 @@
             "command": "g++",
             "args": [
                 "-I", "include",
-                "-I", "C:/path/to/vcpkg/installed/x64-windows/include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
                 "-c",
                 "src/Board.cpp",
                 "-o",
                 "obj/Board.o"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            ]
         },
         {
             "label": "compile game",
@@ -24,15 +20,12 @@
             "command": "g++",
             "args": [
                 "-I", "include",
-                "-I", "C:/path/to/vcpkg/installed/x64-windows/include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
                 "-c",
                 "src/Game.cpp",
                 "-o",
                 "obj/Game.o"
-            ],
-            "group": {
-                "kind": "build"
-            }
+            ]
         },
         {
             "label": "compile player",
@@ -40,15 +33,38 @@
             "command": "g++",
             "args": [
                 "-I", "include",
-                "-I", "C:/path/to/vcpkg/installed/x64-windows/include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
                 "-c",
                 "src/Player.cpp",
                 "-o",
                 "obj/Player.o"
-            ],
-            "group": {
-                "kind": "build"
-            }
+            ]
+        },
+        {
+            "label": "compile gamestate",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
+                "-c",
+                "src/GameState.cpp",
+                "-o",
+                "obj/GameState.o"
+            ]
+        },
+        {
+            "label": "compile main",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
+                "-c",
+                "src/main.cpp",
+                "-o",
+                "obj/main.o"
+            ]
         },
         {
             "label": "create static library",
@@ -59,11 +75,9 @@
                 "lib/libGameLibrary.a",
                 "obj/Board.o",
                 "obj/Game.o",
-                "obj/Player.o"
-            ],
-            "group": {
-                "kind": "build"
-            }
+                "obj/Player.o",
+                "obj/GameState.o"
+            ]
         },
         {
             "label": "link and build executable",
@@ -71,12 +85,31 @@
             "command": "g++",
             "args": [
                 "-I", "include",
-                "-I", "C:/path/to/vcpkg/installed/x64-windows/include",
-                "src/main.cpp",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
+                "obj/Board.o",
+                "obj/Game.o",
+                "obj/Player.o",
+                "obj/GameState.o",
+                "obj/main.o",
                 "-o", "bin/main.exe"
+            ]
+        },
+        {
+            "label": "compile all",
+            "type": "shell",
+            "dependsOn": [
+                "compile board",
+                "compile game",
+                "compile player",
+                "compile gamestate",
+                "compile main",
+                "create static library",
+                "link and build executable"
             ],
+            "dependsOrder": "sequence",
             "group": {
-                "kind": "build"
+                "kind": "build",
+                "isDefault": true
             }
         }
     ]

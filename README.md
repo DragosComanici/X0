@@ -1,22 +1,79 @@
 # Joc X și 0
 
-- **board.hpp**: Definește structura tabloului de joc, incluzând metodele pentru desenarea tablei, plasarea simbolurilor și verificarea câștigătorului. A fost adăugat suport pentru constructori și operatori pentru gestionarea stării tabloului.
+board.hpp
 
-- **board.cpp**: Conține implementarea metodelor definite în `board.hpp`, gestionând logica pentru interacțiunea cu tabla de joc.
+Definește structura tabloului de joc, incluzând:
 
-- **game.hpp**: Coordonează logica jocului, incluzând metodele pentru gestionarea rândurilor jucătorilor și alternarea între aceștia.
+    Metode pentru desenarea tablei
+    Plasarea simbolurilor
+    Verificarea câștigătorului
+    Adaugă suport pentru constructori și operatori pentru gestionarea stării tabloului.
 
-- **game.cpp**: Implementarea metodelor din `game.hpp`, controlând fluxul jocului și interacțiunea cu jucătorii și tabla de joc.
+board.cpp
 
-- **player.hpp**: Definește structura unui jucător, incluzând simbolul acestuia (marker) și metodele pentru accesarea și modificarea acestuia. Numărul jucătorului este atribuit automat pe baza simbolului.
+Conține implementarea metodelor definite în board.hpp, gestionând logica pentru interacțiunea cu tabla de joc.
+game.hpp
 
-- **player.cpp**: Conține implementarea metodelor din player.hpp, gestionând informațiile specifice fiecărui jucător. Oferă funcționalitate de bază pentru crearea jucătorilor și obținerea simbolurilor lor.
+Coordonează logica jocului, incluzând metode pentru:
 
-- **Makefile**: Conține instrucțiuni pentru compilarea proiectului. Acesta definește variabilele necesare, regulile pentru a genera executabilul și o regulă de curățare pentru a șterge executabilul generat.
+    Gestionarea rândurilor jucătorilor
+    Alternarea între jucători
+
+game.cpp
+
+Implementarea metodelor din game.hpp, controlând fluxul jocului și interacțiunea cu jucătorii și tabla de joc.
+player.hpp
+
+Definește structura unui jucător, incluzând:
+
+    Simbolul (marker-ul) acestuia
+    Metode pentru accesarea și modificarea simbolului
+    Numărul jucătorului este atribuit automat pe baza simbolului.
+
+player.cpp
+
+Implementarea metodelor din player.hpp, gestionând informațiile fiecărui jucător. Oferă funcționalitate pentru:
+
+    Crearea jucătorilor
+    Obținerea simbolurilor lor
+
+GameState.hpp și GameState.cpp
+
+Adaugă o structură care gestionează stările jocului, incluzând metode pentru:
+
+    Salvarea și restaurarea stării curente a jocului
+    Manipularea datelor persistente pentru fluxul jocului.
+
+main.cpp
+
+Punctul de intrare al aplicației, unde:
+
+    Se inițializează jocul
+    Se creează obiectele principale (Board, Game, Player)
+    Se controlează logica principală a interacțiunii utilizatorului.
+
+tasks.json
+
+Folosit în Visual Studio Code pentru gestionarea sarcinilor automate, inclusiv:
+
+    Compilarea fișierelor .cpp
+    Generarea executabilului principal.
+
+c_cpp_properties.json
+
+Conține configurațiile specifice pentru Visual Studio Code, inclusiv căile pentru fișierele de antet.
+
+
 
 # Construcția Proiectului
 
 Clonăm repositoriul:
-```bash
+```bash'
 git clone https://github.com/DragosComanici/X0.git
 cd X0
+
+Rulați comanda Ctrl+Shift+B pentru a compila și construi proiectul.
+Executabilul va fi generat în folderul bin/.
+
+CLEANUP
+rm -rf obj/*.o bin/main.exe

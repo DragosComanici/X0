@@ -11,7 +11,7 @@ Game::Game()
 
 void Game::start() {
     while (true) {
-        board = Board();  // Reset board for each game
+        board = Board();
         while (!board.isFull() && board.checkWinner() == 0) {
             playTurn();
             switchCurrentPlayer();
