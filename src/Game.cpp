@@ -1,24 +1,42 @@
 #include "Game.hpp"
 #include <iostream>
 
-// Constructor
 Game::Game() 
-    : board(),
-      player1('X'),
-      player2('O'),
-      currentPlayer(1) {}
+    : board(), 
+      player1('X'), 
+      player2('O'), 
+      currentPlayer(1),
+      player1Wins(0), 
+      player2Wins(0) {}
 
 void Game::start() {
-    while (!board.isFull() && board.checkWinner() == 0) {
-        playTurn();
-        switchCurrentPlayer();
-    }
+    while (true) {
+        board = Board();  // Reset board for each game
+        while (!board.isFull() && board.checkWinner() == 0) {
+            playTurn();
+            switchCurrentPlayer();
+        }
 
-    int winner = board.checkWinner();
-    if (winner == 0) {
-        std::cout << "It's a draw!" << std::endl;
-    } else {
-        std::cout << "Player " << winner << " wins!" << std::endl;
+        int winner = board.checkWinner();
+        if (winner == 0) {
+            std::cout << "It's a draw!" << std::endl;
+        } else {
+            std::cout << "Player " << winner << " wins!" << std::endl;
+            if (winner == 1) {
+                player1Wins++;
+            } else {
+                player2Wins++;
+            }
+        }
+
+        displayScore();
+
+        char playAgain;
+        std::cout << "Play again? (y/n): ";
+        std::cin >> playAgain;
+        if (playAgain != 'y') {
+            break;
+        }
     }
 }
 
@@ -31,7 +49,6 @@ void Game::playTurn() {
 
     while (!validMove) {
         std::cin >> slot;
-
         if (currentPlayer == 1) {
             if (board.placeMarker(slot, player1.getMarker())) {
                 validMove = true;
@@ -50,4 +67,8 @@ void Game::playTurn() {
 
 void Game::switchCurrentPlayer() {
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
+}
+
+void Game::displayScore() const {
+    std::cout << "Score: Player 1 (X): " << player1Wins << " - Player 2 (O): " << player2Wins << std::endl;
 }

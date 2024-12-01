@@ -1,5 +1,6 @@
-*.o
+*.o          # Object files
+*.a          # Static libraries
+*.so         # Shared libraries (Linux)
+*.out        # Executables (Linux)
 
-compileX0.exe
-
-Makefile
+/lib/

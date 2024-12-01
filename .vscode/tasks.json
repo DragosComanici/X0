@@ -1,0 +1,83 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "compile board",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-I", "C:/path/to/vcpkg/installed/x64-windows/include",
+                "-c",
+                "src/Board.cpp",
+                "-o",
+                "obj/Board.o"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "compile game",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-I", "C:/path/to/vcpkg/installed/x64-windows/include",
+                "-c",
+                "src/Game.cpp",
+                "-o",
+                "obj/Game.o"
+            ],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "compile player",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-I", "C:/path/to/vcpkg/installed/x64-windows/include",
+                "-c",
+                "src/Player.cpp",
+                "-o",
+                "obj/Player.o"
+            ],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "create static library",
+            "type": "shell",
+            "command": "ar",
+            "args": [
+                "rcs",
+                "lib/libGameLibrary.a",
+                "obj/Board.o",
+                "obj/Game.o",
+                "obj/Player.o"
+            ],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "link and build executable",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-I", "C:/path/to/vcpkg/installed/x64-windows/include",
+                "src/main.cpp",
+                "-o", "bin/main.exe"
+            ],
+            "group": {
+                "kind": "build"
+            }
+        }
+    ]
+}

@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "array": "cpp"
+    },
+    "terminal.integrated.env.windows": {
+        "PATH": "C:/msys64/mingw64/bin:${env:PATH}"
     }
 }

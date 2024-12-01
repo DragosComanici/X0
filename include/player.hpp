@@ -4,10 +4,8 @@
 class Player {
 public:
     Player(char marker);
-
     char getMarker() const;
     void setMarker(char marker);
-
     int getPlayerNumber() const;
 
 private:

@@ -6,9 +6,7 @@
 
 class Game {
 public:
-    // Constructor
     Game();
-
     void start();
 
 private:
@@ -16,9 +14,12 @@ private:
     Player player1;
     Player player2;
     int currentPlayer;
+    int player1Wins;
+    int player2Wins;
 
     void playTurn();
     void switchCurrentPlayer();
+    void displayScore() const;
 };
 
 #endif

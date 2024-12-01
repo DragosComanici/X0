@@ -1,6 +1,5 @@
 #include "Player.hpp"
 
-// Constructor cu parametru
 Player::Player(char marker) : marker(marker), playerNumber(marker == 'X' ? 1 : 2) {}
 
 char Player::getMarker() const {
