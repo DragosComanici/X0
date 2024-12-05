@@ -1,6 +1,9 @@
 #include "Game.hpp"
 #include <iostream>
 
+/**
+ * @brief Constructor implicit care inițializează un joc nou cu valorile implicite.
+ */
 Game::Game() 
     : board(), 
       player1('X'), 
@@ -9,9 +12,12 @@ Game::Game()
       player1Wins(0), 
       player2Wins(0) {}
 
+/**
+ * @brief Metoda principală care gestionează desfășurarea jocului.
+ */
 void Game::start() {
     while (true) {
-        board = Board();
+        board = Board(); // Resetează tabla.
         while (!board.isFull() && board.checkWinner() == 0) {
             playTurn();
             switchCurrentPlayer();
@@ -19,9 +25,9 @@ void Game::start() {
 
         int winner = board.checkWinner();
         if (winner == 0) {
-            std::cout << "It's a draw!" << std::endl;
+            std::cout << "Egalitate!" << std::endl;
         } else {
-            std::cout << "Player " << winner << " wins!" << std::endl;
+            std::cout << "Jucătorul " << winner << " a câștigat!" << std::endl;
             if (winner == 1) {
                 player1Wins++;
             } else {
@@ -32,7 +38,7 @@ void Game::start() {
         displayScore();
 
         char playAgain;
-        std::cout << "Play again? (y/n): ";
+        std::cout << "Joci din nou? (y/n): ";
         std::cin >> playAgain;
         if (playAgain != 'y') {
             break;
@@ -40,9 +46,12 @@ void Game::start() {
     }
 }
 
+/**
+ * @brief Gestionează o tură a jucătorului curent, incluzând validarea mutării.
+ */
 void Game::playTurn() {
     board.draw();
-    std::cout << "Player " << currentPlayer << "'s turn. Enter a slot (1-9): ";
+    std::cout << "Tura jucătorului " << currentPlayer << ". Introdu un slot (1-9): ";
 
     int slot;
     bool validMove = false;
@@ -53,22 +62,28 @@ void Game::playTurn() {
             if (board.placeMarker(slot, player1.getMarker())) {
                 validMove = true;
             } else {
-                std::cout << "Invalid move! Try again." << std::endl;
+                std::cout << "Mutare invalidă! Încearcă din nou." << std::endl;
             }
         } else {
             if (board.placeMarker(slot, player2.getMarker())) {
                 validMove = true;
             } else {
-                std::cout << "Invalid move! Try again." << std::endl;
+                std::cout << "Mutare invalidă! Încearcă din nou." << std::endl;
             }
         }
     }
 }
 
+/**
+ * @brief Schimbă jucătorul curent între Player 1 și Player 2.
+ */
 void Game::switchCurrentPlayer() {
     currentPlayer = (currentPlayer == 1) ? 2 : 1;
 }
 
+/**
+ * @brief Afișează scorul curent al jucătorilor.
+ */
 void Game::displayScore() const {
-    std::cout << "Score: Player 1 (X): " << player1Wins << " - Player 2 (O): " << player2Wins << std::endl;
+    std::cout << "Scor: Jucătorul 1 (X): " << player1Wins << " - Jucătorul 2 (O): " << player2Wins << std::endl;
 }
