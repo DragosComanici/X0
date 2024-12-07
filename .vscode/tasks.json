@@ -8,6 +8,7 @@
             "args": [
                 "-I", "include",
                 "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include/gtest",
                 "-c",
                 "src/Board.cpp",
                 "-o",
@@ -21,6 +22,7 @@
             "args": [
                 "-I", "include",
                 "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include/gtest",
                 "-c",
                 "src/Game.cpp",
                 "-o",
@@ -34,6 +36,7 @@
             "args": [
                 "-I", "include",
                 "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include/gtest",
                 "-c",
                 "src/Player.cpp",
                 "-o",
@@ -47,6 +50,7 @@
             "args": [
                 "-I", "include",
                 "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include/gtest",
                 "-c",
                 "src/GameState.cpp",
                 "-o",
@@ -60,10 +64,45 @@
             "args": [
                 "-I", "include",
                 "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include/gtest",
                 "-c",
                 "src/main.cpp",
                 "-o",
                 "obj/main.o"
+            ]
+        },
+        {
+            "label": "compile test",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include/gtest",
+                "-I", "tests",
+                "-c",
+                "tests/test_main.cpp",
+                "-o",
+                "obj/test_main.o"
+            ]
+        },
+        {
+            "label": "link and run tests",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-I", "include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include/gtest",
+                "obj/test_main.o",
+                "obj/Board.o",
+                "obj/Game.o",
+                "obj/Player.o",
+                "obj/GameState.o",
+                "-o", "bin/test_main.exe",
+                "-lgtest",
+                "-lgtest_main",
+                "-pthread"
             ]
         },
         {
@@ -86,6 +125,7 @@
             "args": [
                 "-I", "include",
                 "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include",
+                "-I", "C:/Users/user/Documents/GitHub/X0/vcpkg/installed/x64-windows/include/gtest",
                 "obj/Board.o",
                 "obj/Game.o",
                 "obj/Player.o",
@@ -109,6 +149,15 @@
             "dependsOrder": "sequence",
             "group": {
                 "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "run tests",
+            "type": "shell",
+            "command": "bin/test_main.exe",
+            "group": {
+                "kind": "test",
                 "isDefault": true
             }
         }
